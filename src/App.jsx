@@ -1,10 +1,15 @@
+
+
 import React from 'react'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
+
 import Login from './page/Login'
 import Browse from './page/Browse'
+import NotFound from './components/NotFound'
 
+import AuthProvider  from './context/AuthProvider'
 
-const Router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path:'/',
     element : <Login/>
@@ -12,15 +17,21 @@ const Router = createBrowserRouter([
   {
     path:'/browse',
     element : <Browse/>
+  },
+  {
+    path:'*',
+    element : <NotFound/>
   }
 ]);
 
+
+
 const App = () => {
   return (
-    <>
-      <RouterProvider router={Router}/>
-    </>
+    <AuthProvider> 
+      <RouterProvider router={router} />
+    </AuthProvider>
   )
-}
+};
 
-export default App
+export default App;

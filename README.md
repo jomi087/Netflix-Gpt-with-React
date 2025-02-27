@@ -2,8 +2,13 @@
 
 * Implimentation
     * vite + tailwind css
-    * Authentication with firebase
-    * Intigrated Gpt in search bar
+    * implimented routes
+    * SignIn,SignUp form & its validation
+    * 
+    * **Authentication with Firebase**
+        * vist firbase website &  install firebase via npm  & config firbase 
+        * 
+    * **Intigrated Gpt in search bar**
     * 
 * Fetures
     - landing Page
@@ -18,3 +23,23 @@
 * Tips
     - for "Forms" there is a library called **formik**  which makes impliment "Form" easy like it help in validation error handling etc (jst check their website formik)
     - 
+
+
+
+* re-render happens in case of useState
+    - signin , signup button for swapping  btween 2 forms
+    - if validation fail for showing errormsg
+
+** *Firebase**
+    - Firebase is a **backend platform by Google that helps developers build web and mobile apps without managing servers**,
+    > simple way, its a platform for Backend as a service
+        - It provides many ready-to-use features like:
+            - Database – Store and sync data in real time (Firestore, Realtime Database).
+            - Authentication – Allow users to log in using email, Google, Facebook, etc.
+            - Storage – Save and retrieve files like images and videos.
+            - Hosting – Deploy websites quickly with free SSL.
+            - Functions – Run backend code without managing a server.
+            - Analytics & Messaging – Track users and send notifications.
+            - ETC.....................
+
+
