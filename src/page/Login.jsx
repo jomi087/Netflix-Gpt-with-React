@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useRef, useState } from 'react';
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "firebase/auth";
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword ,updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";  // be sure u want setDoc or addDoc
 import {auth,db} from '../utils/firebase'
 
@@ -46,39 +46,47 @@ const Login = () => {
     if (!error) {
       error = emailpasswordvalidation(emailInputRef.current?.value,passwordInputRef.current?.value);
     }
-    toast.error(error)
     // setErrorMsg(error);
-    if(error) return ;
-    
+    if(error) {
+      toast.error(error)
+      return ;
+    }  
+
+
     //firebase authentication         /* i have written this for a understanding how evr next time i recommend to write in separete module and invoke it and use async await that is much more clean to read */
     if(!signInForm){ 
       //Signup logic from fireBase
       createUserWithEmailAndPassword(auth,emailInputRef.current?.value,passwordInputRef.current?.value) //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
-      .then(async (userCredential) => {  //Signup succesfull
+      .then( (userCredential) => {  //Signup succesfull
         const user = userCredential.user;
 
-        await setDoc(doc(db, "users", user.uid), {  //https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document
-          name: nameInputRef.current?.value,
-          email: user.email,
-        });
-
+        // Update the user profile with the display name
+        return  updateProfile(user, {
+          displayName: nameInputRef.current?.value
+        })
+        .then(()=>{
+          // Save user data in Firestore
+          return setDoc(doc(db, "users", user.uid), {  //https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document
+            name: nameInputRef.current?.value,
+            email: user.email,
+          });
+        })
       })
       .catch((error) => { //Signup failed
         const errorCode = error.code;
         toast.error(errorCode.split('/')[1])
         //setErrorMsg(errorCode)
-
       }); 
 
     }else{  
       //SignIn logic from firbase
       signInWithEmailAndPassword(auth,emailInputRef.current?.value,passwordInputRef.current?.value) // https://firebase.google.com/docs/auth/web/password-auth#sign_in_a_user_with_an_email_address_and_password
       .then((userCredential) => {   // Signin  successfully
-         //console.log(userCredential.user)
+        console.log(userCredential.user)
         navigate("/browse");
     
       })
-      .catch((error) => {   //Signup failed
+      .catch((error) => {   //SignIn failed
         const errorCode = error.code;
         toast.error(errorCode.split('/')[1])
         // setErrorMsg(errorCode.split('/')[1].toUpperCase())
