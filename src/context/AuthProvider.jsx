@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import AuthContext from "./AuthContext"; // Import the context
 import { auth } from "../utils/firebase"; // Import Firebase auth
 
@@ -8,22 +8,18 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Listen for auth state changes
+    // Listen for auth state changes  //@ login logout signup
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setAuthUser(user);
-      setLoading(false);
+      setLoading(false);  
     });
 
     return () => unsubscribe(); // Cleanup the listener on unmount
   }, []);
 
-  const logout = async () => {
-    await signOut(auth);
-  };
-
   return (
-    <AuthContext.Provider value={{ authUser, logout }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ authUser  }}>
+      {!loading && children}    {/* shortCircut based rendering */}
     </AuthContext.Provider>
   );
 };
