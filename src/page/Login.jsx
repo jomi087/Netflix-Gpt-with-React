@@ -10,11 +10,12 @@ import Footer from '../components/Footer';
 import { emailpasswordvalidation , namevalidation } from '../utils/validation'
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
   const [signInForm,setSignInForm]=useState(true)
-  const [errorMsg,setErrorMsg] = useState(null)
+  //const [errorMsg,setErrorMsg] = useState(null) // avoided errorMsg cz of tostify 
 
   const nameInputRef = useRef(null)
   const emailInputRef = useRef(null)
@@ -45,7 +46,8 @@ const Login = () => {
     if (!error) {
       error = emailpasswordvalidation(emailInputRef.current?.value,passwordInputRef.current?.value);
     }
-    setErrorMsg(error);
+    toast.error(error)
+    // setErrorMsg(error);
     if(error) return ;
     
     //firebase authentication         /* i have written this for a understanding how evr next time i recommend to write in separete module and invoke it and use async await that is much more clean to read */
@@ -63,8 +65,8 @@ const Login = () => {
       })
       .catch((error) => { //Signup failed
         const errorCode = error.code;
-        const errorMessage = error.message;
-        setErrorMsg(errorCode+ "-" +errorMessage)
+        toast.error(errorCode.split('/')[1])
+        //setErrorMsg(errorCode)
 
       }); 
 
@@ -74,12 +76,12 @@ const Login = () => {
       .then((userCredential) => {   // Signin  successfully
          //console.log(userCredential.user)
         navigate("/browse");
-         
+    
       })
       .catch((error) => {   //Signup failed
         const errorCode = error.code;
-        const errorMessage = error.message;
-        setErrorMsg(errorCode+ "-" +errorMessage )
+        toast.error(errorCode.split('/')[1])
+        // setErrorMsg(errorCode.split('/')[1].toUpperCase())
       });
 
     }
@@ -124,7 +126,7 @@ const Login = () => {
             className="p-3 my-2 w-full bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
-          <p className="text-red-500 font-bold p-2">{errorMsg}</p>
+          {/* <p className="text-red-500 font-bold p-2">{errorMsg}</p> */}
 
           <button className="p-3 my-4 bg-red-600 w-full rounded font-semibold hover:bg-red-700 transition"
           onClick={handleButtonClick}
