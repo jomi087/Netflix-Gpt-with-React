@@ -30,7 +30,7 @@
     - signin , signup button for swapping  btween 2 forms
     - if validation fail for showing errormsg
 
-** *Firebase**
+* **Firebase**
     - Firebase is a **backend platform by Google that helps developers build web and mobile apps without managing servers**,
     > simple way, its a platform for Backend as a service
         - It provides many ready-to-use features like:
@@ -43,3 +43,11 @@
             - ETC.....................
 
 
+* **InBuilt DotEnv and its Rule** 
+    *  Vite has built-in support for environment variables. You can use .env files directly.
+        - That means , no need to import or install any env cz Vite automatically loads .env files but it should be create in root of our project 
+    * As a Rule for securty purpose use VITE first 
+        - Vite only exposes environment variables to the frontend if they start with VITE_. Any variable without VITE_ will not be available in import.meta.env.This is done for security reasons—so that by default, sensitive backend variables (like database passwords) don’t get exposed accidentally.So, if you want to use an environment variable in a Vite React app, you must prefix it with VITE_.
+    * In Vite, environment variables are accessed using 
+        > import.meta.env 
+        - instead of process.env.keyname

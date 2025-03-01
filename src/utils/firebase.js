@@ -10,13 +10,13 @@ import { getFirestore } from "firebase/firestore"; //firestore is a  NoSQL docum
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyB0JB65XL7ZxGJFBVnxU-mYovJfazdbzWw",
-  authDomain: "netflixgpt-498c6.firebaseapp.com",
-  projectId: "netflixgpt-498c6",
-  storageBucket: "netflixgpt-498c6.firebasestorage.app",
-  messagingSenderId: "695915557900",
-  appId: "1:695915557900:web:0dcdf97a091e96d67e2a29",
-  measurementId: "G-LYXWVJX8FP"
+  apiKey:             import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:         import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:          import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:      import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId:  import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:              import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId:      import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
