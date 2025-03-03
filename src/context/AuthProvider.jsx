@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Listen for auth state changes  //@ login logout signup
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {  //onAuthStateChanged return a  event stopper function  
       setAuthUser(user);
       setLoading(false);  
     });

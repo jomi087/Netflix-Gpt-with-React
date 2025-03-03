@@ -2,15 +2,15 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword ,updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";  // be sure u want setDoc or addDoc
-import {auth,db} from '../utils/firebase'
-
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { emailpasswordvalidation , namevalidation } from '../utils/validation'
 import AuthContext from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import {auth,db} from '../utils/firebase'
+import { BG_IMG } from '../utils/constants';
 
 const Login = () => {
 
@@ -102,7 +102,7 @@ const Login = () => {
 
       <div className="absolute inset-0">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/0cf2c109-3af1-4a9d-87d7-aecfac5fe881/web/IN-en-20250217-TRIFECTA-perspective_c3376e06-9aff-4657-aafb-91256a597b7c_large.jpg"
+          src={BG_IMG}
           alt="netflix-bg-img"
           className="w-full h-full object-cover"
         />

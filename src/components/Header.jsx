@@ -28,10 +28,10 @@ const Header = () => {
   } 
   return (
     <>
-      <div className="absolute px-10 py-6 bg-gradient-to-b from-black z-10 w-screen flex justify-between">
+      <div className={`absolute ${authUser ? "py-6 px-12" : "py-11 px-25"} bg-gradient-to-b from-black z-10 w-screen flex justify-between`} >
           <img 
             src={netflixLogo} 
-            className="w-35"
+            className={authUser ? "w-28 h-9" : "w-44"}
             alt="logo-Netflix"
           />
         { authUser && 
