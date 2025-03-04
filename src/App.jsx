@@ -9,6 +9,8 @@ import Login from './page/Login'
 import Browse from './page/Browse'
 import NotFound from './components/NotFound'
 import AuthProvider  from './context/AuthProvider'
+import SearchProvider from './context/SearchProvider';
+import LanguageProvider from './context/LanguageProvider';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +32,12 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <AuthProvider> 
-      <ToastContainer theme='dark'/>
-      <RouterProvider router={router} />
+      <LanguageProvider>
+        <SearchProvider>
+          <ToastContainer theme='dark'/>
+          <RouterProvider router={router} />
+        </SearchProvider>
+      </LanguageProvider>
     </AuthProvider>
   )
 };

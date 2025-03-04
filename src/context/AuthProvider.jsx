@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authUser  }}>
+    <AuthContext.Provider value={{ authUser }}>
       {!loading && children}    {/* shortCircut based rendering */}
     </AuthContext.Provider>
   );

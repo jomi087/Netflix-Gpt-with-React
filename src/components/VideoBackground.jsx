@@ -17,7 +17,7 @@ const VideoBackground = ({movieId}) => {
             })
             // console.log("trailerData",trailerData)
             const trailer = trailerData.length ? trailerData[0] : data.results[0] ;
-            console.log("trailer",trailer)
+            // console.log("trailer",trailer)
             setTrailerId(trailer?.key)
         }
         getMovieVideos()
